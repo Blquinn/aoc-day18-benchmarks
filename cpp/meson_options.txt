@@ -1,0 +1,4 @@
+option('set_impl', 
+  type : 'combo', 
+  choices : ['rbtree', 'btree', 'hashset', 'absl_flat_set', 'ankerl_dense_set'], 
+  value : 'rbtree')
