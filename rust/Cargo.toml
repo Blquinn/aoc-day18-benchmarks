@@ -8,3 +8,17 @@ edition = "2021"
 [dependencies]
 ordered-float = "3.4.0"
 derive_more = "0.99.17"
+fxhash = "0.2.1"
+
+[lib]
+name = "libaoc"
+path = "src/lib.rs"
+
+[[bin]]
+name = "aoc"
+path = "src/main.rs"
+
+[features]
+hashset = []
+fxhash = []
+

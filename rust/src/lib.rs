@@ -1,13 +1,18 @@
 #![feature(never_type)]
 #![feature(test)]
 
+
 use std::{
-    collections::BTreeSet,
     fmt,
-    // fs::File,
-    // io::{BufWriter, Write},
     str::FromStr,
 };
+
+#[cfg(not(any(feature = "hashset", feature = "fxhash")))]
+use std::collections::BTreeSet;
+#[cfg(feature = "hashset")]
+use std::collections::HashSet;
+#[cfg(feature = "fxhash")]
+use fxhash::FxHashSet;
 
 use ordered_float::NotNan;
 
@@ -50,8 +55,18 @@ struct Side {
 
 #[derive(Default)]
 struct State {
+    #[cfg(not(any(feature = "hashset", feature = "fxhash")))]
     cubes: BTreeSet<Cube>,
+    #[cfg(not(any(feature = "hashset", feature = "fxhash")))]
     sides: BTreeSet<Side>,
+    #[cfg(feature = "hashset")]
+    cubes: HashSet<Cube>,
+    #[cfg(feature = "hashset")]
+    sides: HashSet<Side>,
+    #[cfg(feature = "fxhash")]
+    cubes: FxHashSet<Cube>,
+    #[cfg(feature = "fxhash")]
+    sides: FxHashSet<Side>,
 
     min_x: i32,
     max_x: i32,
@@ -62,7 +77,12 @@ struct State {
     min_z: i32,
     max_z: i32,
 
+    #[cfg(not(any(feature = "hashset", feature = "fxhash")))]
     lava_cubes: BTreeSet<Cube>,
+    #[cfg(feature = "hashset")]
+    lava_cubes: HashSet<Cube>,
+    #[cfg(feature = "fxhash")]
+    lava_cubes: FxHashSet<Cube>,
 }
 
 impl State {
@@ -138,7 +158,12 @@ impl State {
     // Mark the corner as a lava cube
     // DFS from there
     fn populate_lava_cubes(&mut self) {
+        #[cfg(not(any(feature = "hashset", feature = "fxhash")))]
         let cube = self.cubes.first().unwrap();
+        #[cfg(feature = "hashset")]
+        let cube = self.cubes.iter().next().unwrap();
+        #[cfg(feature = "fxhash")]
+        let cube = self.cubes.iter().next().unwrap();
 
         // I tried using `RangeInclusive` for this but had off-by-one errors,
         // so I made the port more direct and used 6 separate values instead.
