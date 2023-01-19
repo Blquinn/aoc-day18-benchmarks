@@ -2,6 +2,9 @@
 
 set -e
 
+export CC=clang
+export CXX=clang++
+
 mkdir -p cpp/build
 cd cpp/build
 meson .. &>/dev/null

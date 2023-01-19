@@ -1,0 +1,35 @@
+Running benchmark for set implementation rbtree
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Run          32529 ns        32495 ns        21488
+
+
+Running benchmark for set implementation ankerl_dense_set
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Run          17839 ns        17817 ns        38894
+
+
+Running benchmark for set implementation btree
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Run          35255 ns        35213 ns        19856
+
+
+Running benchmark for set implementation hashset
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Run          23299 ns        23275 ns        29951
+
+
+Running benchmark for set implementation absl_flat_set
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Run          32147 ns        32112 ns        21749
+
+
