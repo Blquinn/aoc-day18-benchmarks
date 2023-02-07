@@ -11,9 +11,7 @@ struct Vec3Hash {
   using is_avalanching = void;
 
   [[nodiscard]] auto operator()(Vec3<T> const &vec) const noexcept -> uint64_t {
-    return ((ankerl::unordered_dense::detail::wyhash::hash(vec.x) ^
-             (ankerl::unordered_dense::detail::wyhash::hash(vec.y) << 1)) >> 1) ^
-           (ankerl::unordered_dense::detail::wyhash::hash(vec.z) << 1);
+    return ankerl::unordered_dense::detail::wyhash::hash(&vec, sizeof(vec));
   }
 };
 
